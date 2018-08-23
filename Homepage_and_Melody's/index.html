@@ -12,7 +12,7 @@
     <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet' />
     <style>
     
-    #demo {
+    #maparea {
         width: 1530px;
         height: 350px;
     }
@@ -63,14 +63,6 @@
     .navbar-default .navbar-brand {
         color: white;
     }
-
-    .container-footer{
-    color: white; 
-    background-color: rgb(84, 2, 104); 
-    background-size: auto;
-    padding: 20px;
-    font-size: 80%;
-    }
     
     </style>
 
@@ -104,7 +96,7 @@
 
     
     
-    <div class="container" id="demo">
+    <div class="container" id="maparea">
           <div class="row2" id="map">
               <div class="col-lg-12 col-md-12 col-sm-12">
                   <div class="jumbotron" id="sunburst">
@@ -174,15 +166,11 @@
 
     var svg = d3.select(map.getPanes().overlayPane).append("svg");
 
-    // if you don't include the leaflet-zoom-hide when a 
-    // user zooms in or out you will still see the phantom
-    // original SVG 
     var g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
 
-    //read in the GeoJSON. This function is asynchronous so
-    // anything that needs the json file should be within
-    d3.json("points.geojson", function(collection) {
+    //read in the GeoJSON. 
+    d3.json("https://raw.githubusercontent.com/melodyquintero/project_2/master/points.geojson", function(collection) {
 
         var featuresdata = collection.features.filter(function(d) {
             return d.properties.id == "route1"
@@ -191,8 +179,9 @@
         var transform = d3.geo.transform({
             point: projectPoint
         });
-
+        // Set up conversion and projection functions
         var d3path = d3.geo.path().projection(transform);
+            
 
         var toLine = d3.svg.line()
             .interpolate("linear")
@@ -310,7 +299,7 @@
             // ptPath.attr("d", d3path);
             g.attr("transform", "translate(" + (-topLeft[0] + 50) + "," + (-topLeft[1] + 50) + ")");
 
-        } //
+        } //MAGIC HAPPENS
         function transition() {
             linePath.transition()
                 .duration(7500)

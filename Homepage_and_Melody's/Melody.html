@@ -197,7 +197,7 @@
             .attr("class", "tooltip")
             .style("opacity", 0);
         
-        d3.json("Size.json", function(error, root) {
+        d3.json("https://raw.githubusercontent.com/melodyquintero/project_2/master/Size.json", function(error, root) {
             var g = svg.selectAll("g")
                 .data(partition.nodes(root))
             .enter().append("g");
