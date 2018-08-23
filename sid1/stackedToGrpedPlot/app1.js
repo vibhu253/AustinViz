@@ -109,17 +109,16 @@ g.append("text")
 .attr("font-size", "18px")
 .attr("stroke", "blue")
 .attr("fill", "blue")
-.text("Home Value Index / ");
+.text("Median Household Income / ");
 
 g.append("text")
 .attr("transform", "rotate(-90)")
 .attr("y", 0 - margin.left+30)
-.attr("x", 0 - (height / 2)-40)
+.attr("x", 0 - (height / 2)+20)
 .attr("font-size", "18px")
 .attr("stroke", "orange")
 .attr("fill", "orange")
-.text("Median Household Income ($)");
-
+.text(" Home Value Index ($)");
 
 
 d3.selectAll("input")
