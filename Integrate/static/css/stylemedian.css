@@ -1,0 +1,10 @@
+
+.navbar-brand {
+  margin-left: 50px;
+  background-color: rgb(1, 21, 110);
+}
+
+
+.navbar-default .navbar-brand {
+  color: white;
+}

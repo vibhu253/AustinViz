@@ -1,0 +1,87 @@
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2px;
+  }
+  
+  .axisGreen line{
+      fill: none;
+    stroke: green;
+    shape-rendering: green;
+    shape-rendering: crispEdges;
+  }
+  
+  .axisGreen path{
+    fill: none;
+    shape-rendering: crispEdges;
+  }
+  
+  .y.axisGreen path{
+    stroke: green;
+  }
+  
+  .axisGreen text{
+    fill: green;
+  } 
+  
+  .axisRed line{
+    stroke: red;
+  }
+  
+  .axisRed path{
+    stroke: red;
+  }
+  
+  .axisRed text{
+    fill: red;
+  } 
+  
+  .clear-button {
+    font: 14px sans-serif;
+    cursor: pointer;
+  }
+  
+  .axis path,
+  .axis line {
+    fill: red;
+    stroke: red;
+    shape-rendering: crispEdges;
+  }
+  
+  .x.axis path {
+    display: none;
+  }
+  
+  .node {
+      cursor: pointer;
+  }
+  
+  .node:hover {
+      stroke: #000;
+      stroke-width: 1.5px;
+  }
+  
+  .node--leaf {
+      fill: BurlyWood;
+  }
+  
+  .label {
+      text-anchor: middle;
+      font: 20px serif;
+      font-variant: small-caps;
+      stroke-width: 1.25px;
+  }
+  
+  .label,
+  .node--root {
+      pointer-events: none;
+  }
+  
+  .node--leaf {
+      pointer-events: all;
+  }
+  .brush .extent {
+    stroke: #fff;
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+  }

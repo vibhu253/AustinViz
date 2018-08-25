@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Project 2</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+    div.tooltip {
+    position: absolute;
+    text-align: left;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    font: 12px sans-serif;
+    background: #0a2538;
+    border: #0a2538 1px solid;
+    border-radius: 0px;
+    pointer-events: none;
+    color: white;
+    }
+
+
+    path {
+    stroke: #fff;
+    fill-rule: evenodd;
+    }
+
+    text {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    }
+
+    .navbar-brand {
+        margin-left: 50px;
+        background-color: rgb(1, 21, 110);
+    }
+      
+  
+    .navbar-default .navbar-brand {
+    color: white;
+    }
+
+    .container-footer{
+    color: white; 
+    background-color: rgb(84, 2, 104); 
+    background-size: auto;
+    padding: 20px;
+    font-size: 80%;
+    }
+
+    #source{
+        text-align: left;
+    }
+
+    </style>
+
+    
+
+</head>
+
+
+<body>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Home Page</a>
+        </div>
+          <ul class="nav navbar-nav navbar-left">
+                  <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Plots <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ url_for('crime') }}">Austin Crime</a></li>
+                      <li><a href="{{ url_for('expenditure') }}">Austin Gov Expenditures</a></li>
+                      <li><a href="{{ url_for('median') }}">Austin Household Income & Home Value Index</a></li>
+                      <li><a href="{{ url_for('traffic') }}">Austin Traffic</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="{{ url_for('index') }}">Storyline</a></li>
+                  </ul>
+              </div>
+    
+          </div>
+    
+ </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-md-10 col-sm-12">
+                <div class="jumbotron" id="sunburst">
+                </div>
+            </div>
+  
+            <div class="col-lg-2 col-md-12 col-sm-12" >
+                <div class="jumbotron" id="source">
+                  
+                  <h5><strong>Data Source</strong></h5>
+                  <hr>
+                  <div class="row" >
+                      <div class="col-lg-12 col-md-12"><a href="https://data.austintexas.gov/Budget-and-Finance/Program-Budget-Operating-Budget-Vs-Expense-Raw-Dat/g5k8-8sud" target="_blank"><img src="https://github.com/melodyquintero/project_2/blob/master/img/Data%20Source.PNG?raw=true" style="height: 20px" alt="" ></a></div>
+                  </div>
+                  <br/>
+                  <h5><strong>Template</strong></h5>
+                  <hr>
+                  <div class="row">
+                      <div class="col-lg-12 col-md-12"><a href="https://bl.ocks.org/mbostock/4063423" target="_blank"><img src="https://github.com/melodyquintero/project_2/blob/master/img/template%20reference.PNG?raw=true" style="height: 80px" alt="" ></a></div>
+                  </div>
+  
+                </div>  
+            </div>
+  
+        </div>
+    </div>
+
+
+<!-- Main -->
+    <script>
+        var width = 900,
+            height = 800,
+            radius = Math.min(width, height) / 2 -50 ;
+        
+        
+        var x = d3.scale.linear()
+            .range([0, 2 * Math.PI]);
+        
+        var y = d3.scale.linear()
+            .range([0, radius]);
+        
+        
+        var color = function(d) {
+        
+            var colors;
+            if (!d.parent) {
+                colors = d3.scale.category20c()
+                    .domain(d3.range(0,10));
+        
+                // White for the root node
+                // itself.
+                d.color = "#fff";
+        
+            } else if (d.children) {
+        
+                var startColor = d3.hcl(d.color)
+                                    .darker(),
+                    endColor   = d3.hcl(d.color)
+                                    .brighter();
+        
+                // Create the scale
+                colors = d3.scale.linear()
+                        .interpolate(d3.interpolateHcl)
+                        .range([
+                            startColor.toString(),
+                            endColor.toString()
+                        ])
+                        .domain([0,d.children.length+1]);
+        
+            }
+        
+            if (d.children) {
+        
+                d.children.map(function(child, i) {
+                    return {size: child.size, idx: i};
+                }).sort(function(a,b) {
+                    return b.size - a.size
+                }).forEach(function(child, i) {
+                    d.children[child.idx].color = colors(i);
+                });
+            }
+        
+            return d.color;
+        };
+        
+        
+        var svg = d3.select("#sunburst").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
+        
+        var partition = d3.layout.partition()
+            .value(function(d) { return d.size; });
+        
+        var arc = d3.svg.arc()
+            .startAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x))); })
+            .endAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx))); })
+            .innerRadius(function(d) { return Math.max(0, y(d.y)); })
+            .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy))+10; });
+        
+        // tooltip
+        var tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+        
+        d3.json("https://raw.githubusercontent.com/melodyquintero/project_2/master/Size.json", function(error, root) {
+            var g = svg.selectAll("g")
+                .data(partition.nodes(root))
+            .enter().append("g");
+        
+            var path = g.append("path")
+            .attr("d", arc)
+            .style("fill", color)
+            .on("click", click)
+            .on("mouseover", function(d) {
+                d3.select(this).style("cursor", "pointer")
+                var totalSize = path.datum().value;
+                var percentage = (100 * d.value/totalSize).toPrecision(3);
+                var expenditure = "$" + (d.value/1000000).toFixed(0).toString() +" million";
+                var percentageString = percentage + "%";
+                if (d.name == " ") return null;
+                tooltip.text(d.name + " "  + expenditure +"\n" + percentageString)
+                .style("opacity", 0.8)
+                .style("left", (d3.event.pageX) + 0 + "px")
+                .style("top", (d3.event.pageY) - 0 + "px");
+            })
+            
+            .on("mouseout", function(d) {
+                d3.select(this).style("cursor", "default")
+                tooltip.style("opacity", 0);
+            });
+        
+            var text = g.append("text")
+            .attr("transform", function(d) { return "rotate(" + computeTextRotation(d) + ")"; })
+            .attr("x", function(d) { return y(d.y); })
+            .attr("dx", "6") // margin
+            .attr("dy", ".35em") // vertical-align
+            .text(function(d) { return d.name; });
+        
+            function click(d) {
+            text.transition().attr("opacity", 0);
+        
+            path.transition()
+                .duration(750)
+                .attrTween("d", arcTween(d))
+                .each("end", function(e, i) {
+                    // check if the animated element's data e lies within the visible angle span given in d
+                    if (e.x >= d.x && e.x < (d.x + d.dx)) {
+                    // get a selection of the associated text element
+                    var arcText = d3.select(this.parentNode).select("text");
+                    // fade in the text element and recalculate positions
+                    arcText.transition().duration(750)
+                        .attr("opacity", 1)
+                        .attr("transform", function() { return "rotate(" + computeTextRotation(e) + ")" })
+                        .attr("x", function(d) { return y(d.y); });
+                    }
+                });
+            }
+        });
+        
+        d3.select(self.frameElement).style("height", height + "px");
+        
+        // Interpolate the scales!
+        function arcTween(d) {
+            var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
+                yd = d3.interpolate(y.domain(), [d.y, 1]),
+                yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
+            return function(d, i) {
+            return i
+                ? function(t) { return arc(d); }
+                : function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); return arc(d); };
+            };
+        }
+        
+        function computeTextRotation(d) {
+            return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
+        }
+        
+    </script>
+
+
+</body>
