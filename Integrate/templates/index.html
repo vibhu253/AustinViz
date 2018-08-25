@@ -101,7 +101,7 @@
         <div class="row">
             <div class="col-sm-3 col-md-3">
                 <div class="thumbnail">
-                <img src="img/Crime.PNG" alt="...">
+                <img src="{{ url_for('static', filename='Crime.PNG') }}" alt="...">
                 <div class="caption">
                     <h5>Austin Crime</h5>
                     <p><a href="{{ url_for('crime') }}" class="btn btn-primary" role="button">Explore</a>
@@ -112,7 +112,7 @@
 
             <div class="col-sm-3 col-md-3">
                 <div class="thumbnail">
-                <img src="img/Melody_Dashboard.PNG" alt="..." width = "800" height = "800">
+                <img src="{{ url_for('static', filename='expenditure.PNG') }}" alt="..." width = "800" height = "800">
                 <div class="caption">
                     <h5>Austin Government Expenditures</h5>
                     <p><a href="{{ url_for('expenditure') }}" class="btn btn-primary" role="button">Explore</a>
@@ -122,7 +122,7 @@
 
             <div class="col-sm-3 col-md-3">
                 <div class="thumbnail">
-                <img src="img/Sid.PNG" alt="..."  width = "800" height = "800">
+                <img src="{{ url_for('static', filename='Median.PNG') }}" alt="..."  width = "800" height = "800">
                 <div class="caption">
                     <h5>Austin Household Income & Home Value Index</h5>
                     <p><a href="{{ url_for('median') }}" class="btn btn-primary" role="button">Explore</a>
@@ -132,7 +132,7 @@
 
             <div class="col-sm-3 col-md-3">
                 <div class="thumbnail">
-                <img src="img/AustinTraffic.PNG" alt="..."  width = "800" height = "800">
+                <img src="{{ url_for('static', filename='Traffic.PNG') }}" alt="..."  width = "800" height = "800">
                 <div class="caption">
                     <h5>Austin Traffic</h5>
                     <p><a href="{{ url_for('traffic') }}" class="btn btn-primary" role="button">Explore</a>
