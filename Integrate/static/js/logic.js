@@ -113,10 +113,10 @@ function createMap(markers,heat,current){
     var myMap = L.map("map", {
       center: [30.36, -97.7431],
       zoom: 10,
-      layers: [streetmap, markers]
+      layers: [darkmap, heat]
     });
-  myMap.addLayer(markers);
-  myMap.addLayer(camMarkers);
+  // myMap.addLayer(markers);
+  // myMap.addLayer(camMarkers);
 
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
