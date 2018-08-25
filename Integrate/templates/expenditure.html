@@ -71,24 +71,15 @@
         <div class="container-fluid">
           <div class="navbar-header">
             <a class="navbar-brand" href="{{ url_for('index') }}">Home Page</a>
-        </div>
-          <ul class="nav navbar-nav navbar-left">
-                  <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Plots <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="{{ url_for('crime') }}">Austin Crime</a></li>
-                      <li><a href="{{ url_for('expenditure') }}">Austin Gov Expenditures</a></li>
-                      <li><a href="{{ url_for('median') }}">Austin Household Income & Home Value Index</a></li>
-                      <li><a href="{{ url_for('traffic') }}">Austin Traffic</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="{{ url_for('index') }}">Storyline</a></li>
-                  </ul>
-              </div>
-    
           </div>
-    
- </nav>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="{{ url_for('crime') }}">Austin Crime</a></li>
+                <li><a href="{{ url_for('expenditure') }}">Austin Gov Expenditures</a></li>
+                <li><a href="{{ url_for('median') }}">Austin Household Income & Home Value Index</a></li>
+                <li><a href="{{ url_for('traffic') }}">Austin Traffic</a></li
+            </ul>
+        </div>
+</nav>
 
     <div class="container">
         <div class="row">

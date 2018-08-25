@@ -28,31 +28,29 @@
 
   </head>
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="{{ url_for('index') }}">Home Page</a>
-        </div>
-          <ul class="nav navbar-nav navbar-left">
-                  <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Plots <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="{{ url_for('crime') }}">Austin Crime</a></li>
-                      <li><a href="{{ url_for('expenditure') }}">Austin Gov Expenditures</a></li>
-                      <li><a href="{{ url_for('median') }}">Austin Household Income & Home Value Index</a></li>
-                      <li><a href="{{ url_for('traffic') }}">Austin Traffic</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="{{ url_for('index') }}">Storyline</a></li>
+      <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="{{ url_for('index') }}">Home Page</a>
+            </div>
+              <ul class="nav navbar-nav navbar-left">
+                  <li><a href="{{ url_for('crime') }}">Austin Crime</a></li>
+                  <li><a href="{{ url_for('expenditure') }}">Austin Gov Expenditures</a></li>
+                  <li><a href="{{ url_for('median') }}">Austin Household Income & Home Value Index</a></li>
+                  <li><a href="{{ url_for('traffic') }}">Austin Traffic</a></li
               </ul>
-        </div>
-      </div>
-    </nav>
-    
-    <div id="visuals"></div>
-    <h1>Visualizations</h1>
-    <p>The map below can be configured to display markers, and/or a heat meap, of traffic incidents over the last 8 years.</p>
-    <hr>
+          </div>
+  </nav>
+  <div class="jumbotron jumbotron-fluid">
+      <h1 class="display-4">Hello, welcome to the Austin Traffic Tab!</h1>
+      <p class="lead">The map below will enable you to visualize real-time traffic data from the city of Austin, TX.</p>
+      <!-- <hr class="my-4">
+      <p>This map is powered by Leaflet and D3.</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+      </p> -->
+    </div>
+
   </body>
   <body>
     <div class="container" id="maparea">

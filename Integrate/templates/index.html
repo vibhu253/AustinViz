@@ -14,7 +14,7 @@
     
     #maparea {
         width: 99%;
-        height: 350px;
+        height: 600px;
     }
 
     #map {
@@ -80,16 +80,10 @@
                 <a class="navbar-brand" href="{{ url_for('index') }}">Home Page</a>
               </div>
                 <ul class="nav navbar-nav navbar-left">
-                        <li class="dropdown">
-                          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Plots <span class="caret"></span></a>
-                          <ul class="dropdown-menu">
-                            <li><a href="{{ url_for('crime') }}">Austin Crime</a></li>
-                            <li><a href="{{ url_for('expenditure') }}">Austin Gov Expenditures</a></li>
-                            <li><a href="{{ url_for('median') }}">Austin Household Income & Home Value Index</a></li>
-                            <li><a href="{{ url_for('traffic') }}">Austin Traffic</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="{{ url_for('index') }}">Storyline</a></li>
+                    <li><a href="{{ url_for('crime') }}">Austin Crime</a></li>
+                    <li><a href="{{ url_for('expenditure') }}">Austin Gov Expenditures</a></li>
+                    <li><a href="{{ url_for('median') }}">Austin Household Income & Home Value Index</a></li>
+                    <li><a href="{{ url_for('traffic') }}">Austin Traffic</a></li
                 </ul>
             </div>
     </nav>
@@ -107,7 +101,7 @@
         <div class="row">
             <div class="col-sm-3 col-md-3">
                 <div class="thumbnail">
-                <img src="..." alt="...">
+                <img src="img/Crime.PNG" alt="...">
                 <div class="caption">
                     <h5>Austin Crime</h5>
                     <p><a href="{{ url_for('crime') }}" class="btn btn-primary" role="button">Explore</a>
@@ -128,7 +122,7 @@
 
             <div class="col-sm-3 col-md-3">
                 <div class="thumbnail">
-                <img src="img/Sid.jpg" alt="..."  width = "800" height = "800">
+                <img src="img/Sid.PNG" alt="..."  width = "800" height = "800">
                 <div class="caption">
                     <h5>Austin Household Income & Home Value Index</h5>
                     <p><a href="{{ url_for('median') }}" class="btn btn-primary" role="button">Explore</a>
@@ -140,7 +134,7 @@
                 <div class="thumbnail">
                 <img src="img/AustinTraffic.PNG" alt="..."  width = "800" height = "800">
                 <div class="caption">
-                    <h5>Austin Traffic Data</h5>
+                    <h5>Austin Traffic</h5>
                     <p><a href="{{ url_for('traffic') }}" class="btn btn-primary" role="button">Explore</a>
                 </div>
                 </div>

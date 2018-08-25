@@ -116,7 +116,8 @@ function drawCirclePacking(error, data) {
 			.attr("id", "packing")
 			.attr("class", "label")
 			.style("fill", "white")
-			.style("stroke", "white")
+			.style("font-size", "125%")
+			// .style("stroke", "white")
 			.style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
 			.style("display", function(d) { return d.parent === root ? "inline" : "none"; })
 			.text(function(d) {
